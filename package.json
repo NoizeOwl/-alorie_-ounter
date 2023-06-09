@@ -1,0 +1,11 @@
+{
+  "name": "ilyacounterproject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel counter/index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
