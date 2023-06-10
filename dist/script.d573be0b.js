@@ -117,40 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/script.js":[function(require,module,exports) {
-var male = document.querySelector("#gender-male");
-var female = document.querySelector("#gender-female");
-var age = document.querySelector("#age");
-var height = document.querySelector("#height");
-var weight = document.querySelector("#weight");
-var active = document.querySelector(".radios-group");
-var resultBut = document.querySelector(".form__submit-button");
-var resetBut = document.querySelector(".form__reset-button");
-var results = document.querySelector(".counter__result");
-var caloriesNorm = results.querySelector("#calories-norm");
-var caloriesMin = results.querySelector("#calories-minimal");
-var caloriesMax = results.querySelector("#calories-maximal");
-var coefficient = 1.2;
-var reset = function reset() {
-  if (age.value !== "" || height.value !== "" || weight.value !== "") {
-    resetBut.removeAttribute("disabled", "true");
+})({"js/resetForm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.resetForm = void 0;
+var _script = require("./script.js");
+var resetForm = function resetForm() {
+  if (_script.age.value !== "" || _script.height.value !== "" || _script.weight.value !== "") {
+    _script.resetButton.disabled = false;
   } else {
-    resetBut.setAttribute("disabled", "true");
+    _script.resetButton.disabled = true;
   }
-  if (age.value !== "" && height.value !== "" && weight.value !== "") {
-    resultBut.removeAttribute("disabled", "true");
+  if (_script.age.value !== "" && _script.height.value !== "" && _script.weight.value !== "") {
+    _script.resultButton.disabled = false;
   } else {
-    resultBut.setAttribute("disabled", "true");
+    _script.resultButton.disabled = true;
   }
 };
+exports.resetForm = resetForm;
+},{"./script.js":"js/script.js"}],"js/resultCalculate.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.resultCalculate = void 0;
+var _script = require("./script.js");
+var caloriesNorm = document.querySelector("#calories-norm");
+var caloriesMin = document.querySelector("#calories-minimal");
+var caloriesMax = document.querySelector("#calories-maximal");
+var resultCalculate = function resultCalculate(coefficient) {
+  var rate = _script.male.checked ? 5 : -161;
+  var finalResult = Math.ceil(10 * _script.weight.value + 6.25 * _script.height.value - 5 * _script.age.value + rate) * coefficient;
+  caloriesNorm.textContent = finalResult.toFixed(2);
+  caloriesMin.textContent = Math.ceil(finalResult - finalResult * 0.15).toFixed(2);
+  caloriesMax.textContent = Math.ceil(finalResult + finalResult * 0.15).toFixed(2);
+};
+exports.resultCalculate = resultCalculate;
+},{"./script.js":"js/script.js"}],"js/script.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.weight = exports.resultButton = exports.resetButton = exports.male = exports.height = exports.age = void 0;
+var _resetForm = require("./resetForm");
+var _resultCalculate = require("./resultCalculate");
+var male = document.querySelector("#gender-male");
+exports.male = male;
+var age = document.querySelector("#age");
+exports.age = age;
+var height = document.querySelector("#height");
+exports.height = height;
+var weight = document.querySelector("#weight");
+exports.weight = weight;
+var active = document.querySelector(".radios-group");
+var activityMinimal = document.querySelector("#activity-minimal");
+var resultButton = document.querySelector(".form__submit-button");
+exports.resultButton = resultButton;
+var resetButton = document.querySelector(".form__reset-button");
+exports.resetButton = resetButton;
+var resultsBlock = document.querySelector(".counter__result");
+var coefficient = 1.2;
 age.addEventListener("input", function () {
-  reset();
+  (0, _resetForm.resetForm)();
 });
 height.addEventListener("input", function () {
-  reset();
+  (0, _resetForm.resetForm)();
 });
 weight.addEventListener("input", function () {
-  reset();
+  (0, _resetForm.resetForm)();
 });
 active.addEventListener("change", function (evt) {
   switch (evt.target.id) {
@@ -171,33 +210,22 @@ active.addEventListener("change", function (evt) {
       break;
   }
 });
-resetBut.addEventListener("click", function () {
-  resetBut.setAttribute("disabled", "true");
-  resultBut.setAttribute("disabled", "true");
-  male.setAttribute("checked", "true");
-  female.removeAttribute("checked", "true");
+resetButton.addEventListener("click", function () {
+  male.checked = true;
   age.value = "";
   height.value = "";
   weight.value = "";
-  active.querySelector("#activity-minimal").setAttribute("checked", "true");
-  active.querySelector("#activity-low").removeAttribute("checked", "true");
-  active.querySelector("#activity-medium").removeAttribute("checked", "true");
-  active.querySelector("#activity-high").removeAttribute("checked", "true");
-  active.querySelector("#activity-maximal").removeAttribute("checked", "true");
-  results.classList.add("counter__result--hidden");
+  activityMinimal.checked = true;
+  resetButton.disabled = true;
+  resultButton.disabled = true;
+  resultsBlock.classList.add("counter__result--hidden");
 });
-resultBut.addEventListener("click", function (evt) {
+resultButton.addEventListener("click", function (evt) {
   evt.preventDefault();
-  var rate = male.checked ? 5 : -161;
-  var finalResult = Math.ceil(10 * weight.value + 6.25 * height.value - 5 * age.value + rate) * coefficient;
-  results.classList.remove("counter__result--hidden");
-  caloriesNorm.textContent = finalResult;
-  var minResult = finalResult - finalResult * 0.15;
-  var maxResult = finalResult + finalResult * 0.15;
-  caloriesMin.textContent = Math.ceil(minResult);
-  caloriesMax.textContent = Math.ceil(maxResult);
+  (0, _resultCalculate.resultCalculate)(coefficient);
+  resultsBlock.classList.remove("counter__result--hidden");
 });
-},{}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./resetForm":"js/resetForm.js","./resultCalculate":"js/resultCalculate.js"}],"../../../AppData/Roaming/nvm/v16.16.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -222,7 +250,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54066" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63265" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -366,5 +394,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/script.js"], null)
+},{}]},{},["../../../AppData/Roaming/nvm/v16.16.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/script.js"], null)
 //# sourceMappingURL=/script.d573be0b.js.map
