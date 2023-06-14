@@ -225,7 +225,7 @@ resultButton.addEventListener("click", function (evt) {
   (0, _resultCalculate.resultCalculate)(coefficient);
   resultsBlock.classList.remove("counter__result--hidden");
 });
-},{"./resetForm":"js/resetForm.js","./resultCalculate":"js/resultCalculate.js"}],"../../../AppData/Roaming/nvm/v16.16.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./resetForm":"js/resetForm.js","./resultCalculate":"js/resultCalculate.js"}],"../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -250,7 +250,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63265" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55823" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
@@ -394,5 +394,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../AppData/Roaming/nvm/v16.16.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/script.js"], null)
+},{}]},{},["../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/script.js"], null)
 //# sourceMappingURL=/script.d573be0b.js.map
